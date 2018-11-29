@@ -1,13 +1,21 @@
 {
   "name": "blog-api",
   "version": "1.0.0",
-  "description": "blog created to leran rest apis and models",
+  "description": "blog to learn rests APIs and models",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexMcComb/blog-api.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexMcComb/blog-api/issues"
+  },
+  "homepage": "https://github.com/AlexMcComb/blog-api#readme",
   "dependencies": {
     "express": "^4.16.4"
   }
