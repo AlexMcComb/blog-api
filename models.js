@@ -17,6 +17,7 @@ function StorageException(message) {
 
 const BlogPosts = {
   create: function(title, content, author, publishDate) {
+    console.log('Creating new blog post item');
     const post = {
       id: uuid.v4(),
       title: title,
