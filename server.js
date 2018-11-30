@@ -1,6 +1,8 @@
 const express = require('express');
 // we'll use morgan to log the HTTP layer
 const morgan = require('morgan');
+
+const app = express();
 //Express router to modularize routes
 const blogPostsRouter = require('./blogPostsRouter');
 
