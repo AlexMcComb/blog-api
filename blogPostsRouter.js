@@ -1,15 +1,7 @@
 const express = require('express');
 const router = express.Router();
-// we'll use body-parser's json() method to 
-// parse JSON data sent in requests to this app
-const bodyParser = require('body-parser');
 
-const jsonParser = bodyParser.json();
-
-// we import the BlogPosts model, which we'll
-// interact with in our GET endpoint
 const {BlogPosts} = require('./models');
-
 
 // we're going to add some items to BlogPosts
 // so there's some data to look at. Note that 
@@ -27,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 //Post request
-router.post('/', jsonParser, (req, res) => {
+router.post('/', (req, res) => {
     // ensure `title` and `budget` are in request body
     const requiredFields = ['title', 'content','author'];
     for (let i=0; i<requiredFields.length; i++) {
@@ -39,7 +31,11 @@ router.post('/', jsonParser, (req, res) => {
       }
     }
   
-    const item = BlogPosts.create(req.body.title, req.body.content, req.body.author);
+    const item = BlogPosts.create(
+      req.body.title, 
+      req.body.content, 
+      req.body.author
+      );
     res.status(201).json(item);
   });
 
@@ -48,8 +44,8 @@ router.post('/', jsonParser, (req, res) => {
 // item id in updated item object match. if problems with any
 // of that, log error and send back status code 400. otherwise
 // call `BlogPosts.update` with updated item.
-router.put('/:id', jsonParser, (req, res) => {
-    const requiredFields = ['id','title', 'content','author'];
+router.put('/:id', (req, res) => {
+    const requiredFields = ['id','title', 'content','author', 'publishDate'];
     for (let i=0; i<requiredFields.length; i++) {
       const field = requiredFields[i];
       if (!(field in req.body)) {
@@ -60,7 +56,9 @@ router.put('/:id', jsonParser, (req, res) => {
     }
   
     if (req.params.id !== req.body.id) {
-      const message = `Request path id (${req.params.id}) and request body id (${req.body.id}) must match`;
+      const message = `Request path id (${
+        req.params.id
+      }) and request body id ``(${req.body.id}) must match`;
       console.error(message);
       return res.status(400).send(message);
     }
@@ -70,6 +68,7 @@ router.put('/:id', jsonParser, (req, res) => {
       title: req.body.title,
       content: req.body.content,
       author: req.body.author,
+      publishDate: req.body.publishDate
     });
     res.status(204).end();
   });
@@ -82,3 +81,4 @@ router.put('/:id', jsonParser, (req, res) => {
     res.status(204).end();
   });
   
+  module.exports = router;

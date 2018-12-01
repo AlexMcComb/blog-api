@@ -2,18 +2,15 @@ const express = require('express');
 // we'll use morgan to log the HTTP layer
 const morgan = require('morgan');
 
-const app = express();
 //Express router to modularize routes
 const blogPostsRouter = require('./blogPostsRouter');
+const app = express();
+
+
 
 app.use(morgan('common'));
 
-app.use(express.static('public'));
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
-});
-
+app.use(express.json());
 
 // when requests come into `/blog-posts`, we'll route them to the express
 // router instances we've imported. Remember,
