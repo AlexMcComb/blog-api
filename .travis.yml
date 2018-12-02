@@ -4,6 +4,6 @@ deploy:
   provider: heroku
   api_key:
     secure: TwO4ih+lXLfZeUg03f71Byel6mkBItuiMR3PE75Vtjf/7tHnU+3ABe7TNHKpt08YgWFu3IBBryYP5pv8vWWBG9dQJaNee77M+JKe3JHEE9Zk/yzoVJYmFh7uBeDwWP5214hyeqW0x3Z/5AIQtkZWyxP5CZgvqr5XpMn6YEnlQV5Jc3Vw4vVlPrfp5HMzrEFUFQ5l0LZ+MKrnr0sZsKv5hK+h7Y9cj9Vzf9oiTVIuTGBJ6AczwqK2gcxzORvksSl5Hd3gaJ2/BwfaH/g7FbHnjXXZgBAVHHCAVgrhHw2S7k80MlDAsZ7mvhPGKmGrpLxgZV/0Mjo70FpNMdOtGh20Kc30CQTUjkmP06zsPOsCxTVjSxBNjeqhiKbrAhkpPqqLLrq6abc3e0RHJpQLdGcBHty/GWKj9dcW3UXyPHWqDlUrrnP8/LB486b6lmcYCyN4wSS4/QSLCQwrlsC+Bjvh+knEDc4SSSVDOdEl2X5zx48jOig70F6ptCapttrvObHALRGr90OC+dbrc3ERBbrRRsnDwwRR1geDUYdBBYYmJ1wSNh0zCNiDKOG9AHY6arA1croEU7HsPWpGZbYObsO9TpkHfjra0gyGHdmX39OkrTuI9yIRoWf/8z8KqVyQH4XSw6dRCkVYUFHJSdu6/Grlg3CwR8WEpa37tVBm8fnY+G4=
-  app: blog-api
+  app: blog-app
   on:
     repo: AlexMcComb/blog-api
