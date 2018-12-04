@@ -15,7 +15,50 @@ BlogPosts.create('Blog post 3', 'This is the third blog post', 'By Jordan');
 // when the root of this route is called with GET, return
 // all current BlogPosts items by calling `BlogPosts.get()`
 router.get('/', (req, res) => {
-  res.json(BlogPosts.get());
+  Blog
+  .find()
+  .then(BlogPosts => {
+    res.json({
+      BlogPosts: BlogPosts.map(
+        (Blog) => Blog.serialize())
+      });
+    })
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
+});
+});
+
+// can also request by ID
+router.get('/:id', (req, res) => {
+  Blog
+    .findById(req.params.id)
+    .then(Blog =>res.json(Blog.serialize()))
+    .catch(err => {
+      console.error(err);
+        res.status(500).json({message: 'Internal server error'})
+    });
+});
+
+//Query
+router.get('/', (req, res) => {
+  const filters = {};
+  const queryableFields = ['title', 'author'];
+  queryableFields.forEach(field => {
+      if (req.query[field]) {
+          filters[field] = req.query[field];
+      }
+  });
+  Blog
+      .find(filters)
+      .then(blogPosts => res.json(
+          blogPosts.map(Blog => blogPosts.serialize())
+      ))
+      .catch(err => {
+          console.error(err);
+          res.status(500).json({message: 'Internal server error'})
+      });
 });
 
 //Post request
@@ -31,12 +74,14 @@ router.post('/', (req, res) => {
       }
     }
   
-    const item = BlogPosts.create(
-      req.body.title, 
-      req.body.content, 
-      req.body.author
-      );
-    res.status(201).json(item);
+    Blog
+      .create({
+      title: req.body.title, 
+      content: req.body.content, 
+      author: req.body.author
+       })
+       .then( 
+    Blog => res.status(201).json(blog.serialize()));
   });
 
 // when PUT request comes in with updated item, ensure has

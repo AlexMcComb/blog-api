@@ -5,7 +5,34 @@ const uuid = require('uuid');
 // we're using in-memory storage. This means each time the app stops, our storage
 // gets erased.
 
+const mongoose = require("mongoose");
 
+// this is our schema to represent a restaurant
+const blogSchema = mongoose.Schema({
+  id: { type: String},
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  author: [
+    { 
+      firstName: String, required: true,
+      lastName: String, required: true
+     }],
+  publishDate: { type: Date, required: true }
+});
+
+blogSchema.virtual("nameString").get(function() {
+  return `${this.author.firstName} ${this.author.lastName}`.trim();
+});
+
+blogSchema.methods.serialize = function() {
+  return {
+    id: this._id,
+    title: this.title,
+    content: this.content,
+    author: this.nameString,
+    publishDate: this.publishDate,
+  };
+};
 
 function StorageException(message) {
    this.message = message;
@@ -64,5 +91,9 @@ function createBlogPostsModel() {
   return storage;
 }
 
+
+// note that all instance methods and virtual properties on our
+// schema must be defined *before* we make the call to `.model`.
+const Blog = mongoose.model("Blog", restaurantSchema);
 
 module.exports = {BlogPosts: createBlogPostsModel()};
